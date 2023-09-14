@@ -2,26 +2,28 @@ const std = @import("std");
 const print = std.debug.print;
 
 pub fn main() void {
-    const arraylist = [5]u32{10, 20, 10, 30, 5};
-    const mSum: u32 = maxSum(arraylist,3);
-    print("{any} \n", .{mSum});
+    const arraylist = [5]i32{10, -20, 10, 30, 5};
+    const mSum: i32 = maxSum(arraylist,3);
+    print("{} \n", .{mSum});
 }
 
-fn maxSum(arraylist: [5]u32,window: u8) u32 {
-    var i: u8 = 0;
-    var windowSum: u32 = 0;
-    var total: u32 = 0; 
+fn maxSum(arraylist: [5]i32,window: usize) i32 {
+    var windowSum: i32 = 0;
+    var max: i32 = 0; 
+    var size: usize = 0;
 
-    while(i < arraylist.len) : (i = i + 1) {
+    for (0..arraylist.len)|i| {
         windowSum += arraylist[i];
 
-        if (windowSum > total) {
-            total = windowSum;
+        if (windowSum > max) {
+            max = windowSum;
         }
 
         if (i >= window-1) {
-            windowSum -= arraylist[i-window+1];
+            size = window-1;
+            windowSum -= arraylist[i-size];
         }
     }
-    return total;
+
+    return max;
 }
