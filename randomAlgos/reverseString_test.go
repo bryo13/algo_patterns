@@ -14,6 +14,7 @@ func TestReverse(t *testing.T) {
 	}
 }
 
+// go test -fuzz=Fuzz -fuzztime 40s
 func FuzzReverse(f *testing.F) {
 	f.Fuzz(func(t *testing.T, a string) {
 		Reverse(a)
